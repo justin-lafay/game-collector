@@ -1,6 +1,5 @@
-import { Image, ScrollView, View } from "react-native";
-
-const logo = require("../assets/images/icon.png");
+import { Link, router } from "expo-router";
+import { Button, ScrollView, Text, View } from "react-native";
 
 export default function Index() {
   return (
@@ -21,9 +20,14 @@ export default function Index() {
         }}
       >
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: 20 }}>
-          <Image source={logo} style={{ width: 100, height: 100}} />
+          <Link href="/about" style={{ color: "blue", padding: 10 }}>
+            <Text>About</Text>
+          </Link>
+          <View style={{ marginTop: 20 }}>
+            <Button onPress={() => router.push("/modal")} title="Create game" />
+          </View>
         </View>
       </ScrollView>
-    </View>
+    </View> 
   );
 }

@@ -1,11 +1,9 @@
-import { Link, router } from "expo-router";
+import { Link, router, useFocusEffect } from "expo-router";
 import { useSQLiteContext } from "expo-sqlite";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { Button, ScrollView, Text, View } from "react-native";
 
 export default function Index() {
-
-
 
   const [games, setGames] = useState<{ id: number; name: string; genre: string; numPlayers: number; avgTime: number }[]>([]);
   
@@ -13,19 +11,29 @@ export default function Index() {
 
   async function fetchGames() {
     try {
-      const result = await database.getAllAsync("SELECT * FROM games;");
+      const result: { id: number; name: string; genre: string; numPlayers: number; avgTime: number }[] = await database.getAllAsync("SELECT * FROM games;");
+      setGames(result);
       console.log("Games fetched successfully:", result);
     } catch (error) {
       console.error("Error fetching games:", error);
     }
   }
 
-  useEffect(() => {
-    database.withTransactionAsync(async () => {
-      await fetchGames();
-      setGames(await database.getAllAsync("SELECT * FROM games;"));
-    });
-  }, [database]);
+  async function deleteGame(id: number) {
+    try {
+      await database.runAsync("DELETE FROM games WHERE id = ?;", [id]);
+      console.log("Game deleted successfully!");
+      fetchGames();
+    } catch (error) {
+      console.error("Error deleting game:", error);
+    }
+  }
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchGames();
+    }, [database])
+  );  
 
   return (
     <View
@@ -54,6 +62,8 @@ export default function Index() {
           <ScrollView style={{ marginTop: 20, width: "100%" }}>
             {games.map((game) => (
               <View key={game.id} style={{ marginTop: 20, padding: 10, borderWidth: 1, borderColor: "gray", borderRadius: 5 }}>
+                // Button to delete element
+                <Button title="Delete" onPress={() => deleteGame(game.id)} />
                 <Text style={{ fontSize: 18, fontWeight: "bold" }}>{game.name}</Text>
                 <Text>Genre: {game.genre}</Text>
                 <Text>Number of players: {game.numPlayers}</Text>

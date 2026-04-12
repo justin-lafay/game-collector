@@ -27,7 +27,6 @@ export default function Modal() {
         router.back();
     }
 
-
     return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "lightblue" }}>
             <View style={{ backgroundColor: "white", padding: 20, borderRadius: 10 }}>

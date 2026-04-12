@@ -2,6 +2,7 @@ import { Link, router, useFocusEffect } from "expo-router";
 import { useSQLiteContext } from "expo-sqlite";
 import { useCallback, useState } from "react";
 import { Button, ScrollView, Text, View } from "react-native";
+import Card from "../card";
 
 export default function Index() {
 
@@ -59,15 +60,12 @@ export default function Index() {
           <View style={{ marginTop: 20 }}>
             <Button onPress={() => router.push("/modal")} title="Create game" />
           </View>
+          <View style={{ marginTop: 20 }}>
+            <Button onPress={() => router.push("/(tabs)/finder")} title="Find a game!" />
+          </View>
           <ScrollView style={{ marginTop: 20, width: "100%" }}>
             {games.map((game) => (
-              <View key={game.id} style={{ marginTop: 20, padding: 10, borderWidth: 1, borderColor: "gray", borderRadius: 5 }}>
-                <Button title="Delete" onPress={() => deleteGame(game.id)} />
-                <Text style={{ fontSize: 18, fontWeight: "bold" }}>{game.name}</Text>
-                <Text>Genre: {game.genre}</Text>
-                <Text>Number of players: {game.numPlayers}</Text>
-                <Text>Average time: {game.avgTime} min</Text>
-              </View>
+              <Card key={game.id} game={game} deleteGame={() => deleteGame(game.id)} />
             ))}
           </ScrollView>
         </View>

@@ -14,13 +14,15 @@ export default function Modal() {
     const database = useSQLiteContext();
 
     const handleCreate = async () => {
-        database.runAsync(
-            "INSERT INTO games (name, genre, numPlayers, avgTime) VALUES (?, ?, ?, ?);",
-            [name, genre, parseInt(numPlayers), parseInt(avgTime)]
-        ).then(() => {
-            console.log("Game created successfully!");
-        }).catch((error) => {
-            console.error("Error creating game:", error);
+        database.withTransactionAsync(async () => {
+            database.runAsync(
+                "INSERT INTO games (name, genre, numPlayers, avgTime) VALUES (?, ?, ?, ?);",
+                [name, genre, parseInt(numPlayers), parseInt(avgTime)]
+            ).then(() => {
+                console.log("Game created successfully!");
+            }).catch((error) => {
+                console.error("Error creating game:", error);
+            });
         });
         router.back();
     }

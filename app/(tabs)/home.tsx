@@ -62,7 +62,6 @@ export default function Index() {
           <ScrollView style={{ marginTop: 20, width: "100%" }}>
             {games.map((game) => (
               <View key={game.id} style={{ marginTop: 20, padding: 10, borderWidth: 1, borderColor: "gray", borderRadius: 5 }}>
-                // Button to delete element
                 <Button title="Delete" onPress={() => deleteGame(game.id)} />
                 <Text style={{ fontSize: 18, fontWeight: "bold" }}>{game.name}</Text>
                 <Text>Genre: {game.genre}</Text>

@@ -6,10 +6,10 @@ import { Button, Text, TextInput, View } from "react-native";
 
 export default function Modal() {
 
-    const [name, setName] = useState("");
-    const [genre, setGenre] = useState("");
-    const [numPlayers, setNumPlayers] = useState("");
-    const [avgTime, setAvgTime] = useState("");
+    const [name, setName] = useState("Test");
+    const [genre, setGenre] = useState("Simple");
+    const [numPlayers, setNumPlayers] = useState("3");
+    const [avgTime, setAvgTime] = useState("60");
 
     const database = useSQLiteContext();
 
@@ -20,11 +20,11 @@ export default function Modal() {
                 [name, genre, parseInt(numPlayers), parseInt(avgTime)]
             ).then(() => {
                 console.log("Game created successfully!");
+                router.back();
             }).catch((error) => {
                 console.error("Error creating game:", error);
             });
         });
-        router.back();
     }
 
     return (

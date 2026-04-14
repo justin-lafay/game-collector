@@ -16,7 +16,7 @@ async function loadDb() {
 
 export default function RootLayout() {
   return (
-    <SQLiteProvider databaseName="games.db" onInit={loadDb}>
+    <SQLiteProvider databaseName="games.db" assetSource={{ assetId: require('../assets/init.db') }}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: "modal" }} />

@@ -14,7 +14,6 @@ export default function Index() {
     try {
       const result: { id: number; name: string; genre: string; numPlayers: number; avgTime: number }[] = await database.getAllAsync("SELECT * FROM games;");
       setGames(result);
-      console.log("Games fetched successfully:", result);
     } catch (error) {
       console.error("Error fetching games:", error);
     }

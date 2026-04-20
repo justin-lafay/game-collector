@@ -5,13 +5,13 @@ import { ScrollView, TextInput, View } from "react-native";
 import Card from "../card";
 
 export default function Finder() {
-    const [games, setGames] = useState<{ id: number; name: string; genre: string; numPlayers: number; avgTime: number }[]>([]);
+    const [games, setGames] = useState<{ id: number; name: string; genre: string; numPlayers: number; avgTime: number; maxTime: number }[]>([]);
   
     const database = useSQLiteContext();
 
     async function fetchGames() {
         try {
-        const result: { id: number; name: string; genre: string; numPlayers: number; avgTime: number }[] = await database.getAllAsync("SELECT * FROM games;");
+        const result: { id: number; name: string; genre: string; numPlayers: number; avgTime: number, maxTime: number }[] = await database.getAllAsync("SELECT * FROM games;");
         setGames(result);
         } catch (error) {
         console.error("Error fetching games:", error);

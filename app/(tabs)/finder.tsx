@@ -11,7 +11,7 @@ export default function Finder() {
 
     async function fetchGames() {
         try {
-        const result: { id: number; name: string; minPlayers: string; maxPlayers: string; avgTime: number; maxTime: number; timeFeeling: string; type: string }[] = await database.getAllAsync("SELECT * FROM games;");
+        const result: { id: number; name: string; minPlayers: string; maxPlayers: string; avgTime: number; maxTime: number; timeFeeling: string; type: string }[] = await database.getAllAsync("SELECT * FROM shelf;");
         setGames(result);
         } catch (error) {
         console.error("Error fetching games:", error);
@@ -20,7 +20,7 @@ export default function Finder() {
 
     async function deleteGame(id: number) {
         try {
-        await database.runAsync("DELETE FROM games WHERE id = ?;", [id]);
+        await database.runAsync("DELETE FROM shelf WHERE id = ?;", [id]);
         console.log("Game deleted successfully!");
         fetchGames();
         } catch (error) {

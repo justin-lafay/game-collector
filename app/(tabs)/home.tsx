@@ -9,10 +9,11 @@ export default function Index() {
   const [games, setGames] = useState<{ id: number; name: string; minPlayers: string; maxPlayers: string; avgTime: number; maxTime: number; timeFeeling: string; type: string }[]>([]);
   
   const database = useSQLiteContext();
+  console.log("Database context:", database.getAllAsync("SELECT name FROM sqlite_master WHERE type='table';"));
 
   async function fetchGames() {
     try {
-      const result: { id: number; name: string; minPlayers: string; maxPlayers: string; avgTime: number; maxTime: number; timeFeeling: string; type: string }[] = await database.getAllAsync("SELECT * FROM games;");
+      const result: { id: number; name: string; minPlayers: string; maxPlayers: string; avgTime: number; maxTime: number; timeFeeling: string; type: string }[] = await database.getAllAsync("SELECT * FROM shelf;");
       setGames(result);
     } catch (error) {
       console.error("Error fetching games:", error);
@@ -21,7 +22,7 @@ export default function Index() {
 
   async function deleteGame(id: number) {
     try {
-      await database.runAsync("DELETE FROM games WHERE id = ?;", [id]);
+      await database.runAsync("DELETE FROM shelf WHERE id = ?;", [id]);
       console.log("Game deleted successfully!");
       fetchGames();
     } catch (error) {

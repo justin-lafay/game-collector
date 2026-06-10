@@ -18,7 +18,7 @@ export default function Modal() {
     const handleCreate = async () => {
         database.withTransactionAsync(async () => {
             database.runAsync(
-                "INSERT INTO games (name, minPlayers, maxPlayers, avgTime, maxTime, feelTime, type) VALUES (?, ?, ?, ?, ?, ?, ?);",
+                "INSERT INTO shelf (game, id, minPlayers, maxPlayers, avgTime, maxTime, timeFeeling, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
                 [name, parseInt(minPlayers), parseInt(maxPlayers), parseInt(avgTime), parseInt(maxTime), feelTime, type]
             ).then(() => {
                 console.log("Game created successfully!");

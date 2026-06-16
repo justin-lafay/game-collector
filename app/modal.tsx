@@ -18,7 +18,7 @@ export default function Modal() {
     const handleCreate = async () => {
         database.withTransactionAsync(async () => {
             database.runAsync(
-                "INSERT INTO shelf (game, id, minPlayers, maxPlayers, avgTime, maxTime, timeFeeling, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
+                "INSERT INTO shelf (game, minPlayers, maxPlayers, avgTime, maxTime, timeFeeling, type) VALUES (?, ?, ?, ?, ?, ?, ?);",
                 [name, parseInt(minPlayers), parseInt(maxPlayers), parseInt(avgTime), parseInt(maxTime), feelTime, type]
             ).then(() => {
                 console.log("Game created successfully!");
@@ -40,11 +40,6 @@ export default function Modal() {
                     placeholder="Name" 
                     value={name}
                     onChangeText={setName} />
-                </View>
-                <View style={{ marginBottom: 10 }}>
-                    <TextInput placeholder="Minimum players" keyboardType="numeric" 
-                    value={minPlayers}
-                    onChangeText={setMinPlayers} />
                 </View>
                 <View style={{ marginBottom: 10 }}>
                     <TextInput placeholder="Maximum players" keyboardType="numeric" 

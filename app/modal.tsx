@@ -1,8 +1,7 @@
 import { router } from "expo-router";
 import { useSQLiteContext } from "expo-sqlite";
 import { useState } from "react";
-import { Button, Text, TextInput, View } from "react-native";
-
+import { Button, KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View, } from "react-native";
 
 export default function Modal() {
 
@@ -30,46 +29,82 @@ export default function Modal() {
     }
 
     return (
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "lightblue" }}>
-            <View style={{ backgroundColor: "white", padding: 20, borderRadius: 10 }}>
-                <View style={{ marginBottom: 10 }}>
-                    <Text style={{ fontSize: 29, fontWeight: "bold" }}>New game</Text>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"} keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}>
+            <ScrollView contentContainerStyle={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "lightblue" }}>
+                <View style={{ backgroundColor: "white", padding: 10, borderRadius: 10, maxWidth: 300, width: "100%" }}>
+                    <View style={{ marginBottom: 10 }}>
+                        <Text style={{ fontSize: 50, fontWeight: "bold" }}>New game</Text>
+                    </View>
+                    <View style={{ marginBottom: 10, flexDirection: "column" }}>
+                    <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+                        Name:
+                    </Text>
+                    <TextInput
+                        value={name}
+                        onChangeText={setName}
+                        style={{ fontSize: 18, borderWidth: 1, borderColor: "gray", borderRadius: 5 }} />
                 </View>
+
                 <View style={{ marginBottom: 10 }}>
-                    <TextInput 
-                    placeholder="Name" 
-                    value={name}
-                    onChangeText={setName} />
-                </View>
-                <View style={{ marginBottom: 10 }}>
-                    <TextInput placeholder="Maximum players" keyboardType="numeric" 
-                    value={maxPlayers}
-                    onChangeText={setMaxPlayers} />
-                </View>
-                <View style={{ marginBottom: 10 }}>
-                    <TextInput placeholder="Average time (min)" keyboardType="numeric" 
-                    value={avgTime}
-                    onChangeText={setAvgTime} />
-                </View>
-                <View style={{ marginBottom: 10 }}>
-                    <TextInput placeholder="Maximum time (min)" keyboardType="numeric" 
-                    value={maxTime}
-                    onChangeText={setMaxTime} />
-                </View>
-                <View style={{ marginBottom: 10 }}>
-                    <TextInput placeholder="Time feeling" 
-                    value={feelTime}
-                    onChangeText={setFeelTime} />
-                </View>
-                <View style={{ marginBottom: 10 }}>
-                    <TextInput placeholder="Game type" 
-                    value={type}
-                    onChangeText={setType} />
+                    <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 10 }}>
+                        <Text style={{ flex: 1, fontSize: 20, fontWeight: "bold" }}>
+                            Max. players:
+                        </Text>
+                        <TextInput
+                            keyboardType="numeric"
+                            value={maxPlayers}
+                            onChangeText={setMaxPlayers}
+                            style={{ flex: 1, fontSize: 18, borderWidth: 1, borderColor: "gray", borderRadius: 5, padding: 5 }}
+                        />
+                    </View>
+                    <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 10 }}>
+                        <Text style={{ flex: 1, fontSize: 20, fontWeight: "bold" }}>
+                            Avrg. time (min):
+                        </Text>
+                        <TextInput
+                            keyboardType="numeric"
+                            value={avgTime}
+                            onChangeText={setAvgTime}
+                            style={{ flex: 1, fontSize: 18, borderWidth: 1, borderColor: "gray", borderRadius: 5, padding: 5 }}
+                        />
+                    </View>
+                    <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 10 }}>
+                        <Text style={{ flex: 1, fontSize: 20, fontWeight: "bold" }}>
+                            Max. time (min):
+                        </Text>
+                        <TextInput
+                            keyboardType="numeric"
+                            value={maxTime}
+                            onChangeText={setMaxTime}
+                            style={{ flex: 1, fontSize: 18, borderWidth: 1, borderColor: "gray", borderRadius: 5, padding: 5 }}
+                        />
+                    </View>
+                    <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 10 }}>
+                        <Text style={{ flex: 1, fontSize: 20, fontWeight: "bold" }}>
+                            Time feeling:
+                        </Text>
+                        <TextInput
+                            value={feelTime}
+                            onChangeText={setFeelTime}
+                            style={{ flex: 1, fontSize: 18, borderWidth: 1, borderColor: "gray", borderRadius: 5, padding: 5 }}
+                        />
+                    </View>
+                    <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 10 }}>
+                        <Text style={{ flex: 1, fontSize: 20, fontWeight: "bold" }}>
+                            Game type:
+                        </Text>
+                        <TextInput
+                            value={type}
+                            onChangeText={setType}
+                            style={{ flex: 1, fontSize: 18, borderWidth: 1, borderColor: "gray", borderRadius: 5, padding: 5 }}
+                        />
+                    </View>
                 </View>
                 <View style={{ marginTop: 20 }}>
-                    <Button title="Create" onPress={() => handleCreate()}/>
+                    <Button title="Create" onPress={() => handleCreate()} />
                 </View>
             </View>
-        </View>
+        </ScrollView>
+    </KeyboardAvoidingView>
     );
 }

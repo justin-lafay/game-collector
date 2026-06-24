@@ -7,6 +7,10 @@ export default function RootLayout() {
             title: 'Home',
             tabBarIcon: ({ color, size }) => <Ionicons name="home" color={color} size={size} />
             }} />
+        <Tabs.Screen name="browse" options={{
+            title: 'Browse',
+            tabBarIcon: ({ color, size }) => <Ionicons name="search" color={color} size={size} />
+            }} />
         <Tabs.Screen name="finder" options={{
             title: 'Finder',
             tabBarIcon: ({ color, size }) => <Ionicons name="filter" color={color} size={size} />

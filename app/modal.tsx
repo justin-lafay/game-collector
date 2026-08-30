@@ -1,7 +1,10 @@
 import { router } from "expo-router";
 import { useSQLiteContext } from "expo-sqlite";
 import { useState } from "react";
-import { Button, KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View, } from "react-native";
+import { Button, KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, TouchableOpacity, View, } from "react-native";
+
+const timeFeelingOptions = ["Court", "Moyen", "Long"];
+const gameTypeOptions = ["Coopération", "Compétition", "Solo"];
 
 export default function Modal() {
 
@@ -79,25 +82,55 @@ export default function Modal() {
                             style={{ flex: 1, fontSize: 18, borderWidth: 1, borderColor: "gray", borderRadius: 5, padding: 5 }}
                         />
                     </View>
-                    <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 10 }}>
-                        <Text style={{ flex: 1, fontSize: 20, fontWeight: "bold" }}>
+                    <View style={{ marginBottom: 10 }}>
+                        <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 8 }}>
                             Time feeling:
                         </Text>
-                        <TextInput
-                            value={feelTime}
-                            onChangeText={setFeelTime}
-                            style={{ flex: 1, fontSize: 18, borderWidth: 1, borderColor: "gray", borderRadius: 5, padding: 5 }}
-                        />
+                        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8 }}>
+                            {timeFeelingOptions.map((option) => (
+                                <TouchableOpacity
+                                    key={option}
+                                    onPress={() => setFeelTime(option)}
+                                    style={{
+                                        paddingVertical: 6,
+                                        paddingHorizontal: 12,
+                                        borderRadius: 8,
+                                        borderWidth: 1,
+                                        borderColor: feelTime === option ? "#007AFF" : "#999",
+                                        backgroundColor: feelTime === option ? "#EAF3FF" : "#FFFFFF",
+                                    }}
+                                >
+                                    <Text style={{ fontSize: 16, fontWeight: feelTime === option ? "bold" : "normal" }}>
+                                        {option}
+                                    </Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
                     </View>
-                    <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 10 }}>
-                        <Text style={{ flex: 1, fontSize: 20, fontWeight: "bold" }}>
+                    <View style={{ marginBottom: 10 }}>
+                        <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 8 }}>
                             Game type:
                         </Text>
-                        <TextInput
-                            value={type}
-                            onChangeText={setType}
-                            style={{ flex: 1, fontSize: 18, borderWidth: 1, borderColor: "gray", borderRadius: 5, padding: 5 }}
-                        />
+                        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8 }}>
+                            {gameTypeOptions.map((option) => (
+                                <TouchableOpacity
+                                    key={option}
+                                    onPress={() => setType(option)}
+                                    style={{
+                                        paddingVertical: 6,
+                                        paddingHorizontal: 12,
+                                        borderRadius: 8,
+                                        borderWidth: 1,
+                                        borderColor: type === option ? "#007AFF" : "#999",
+                                        backgroundColor: type === option ? "#EAF3FF" : "#FFFFFF",
+                                    }}
+                                >
+                                    <Text style={{ fontSize: 16, fontWeight: type === option ? "bold" : "normal" }}>
+                                        {option}
+                                    </Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
                     </View>
                 </View>
                 <View style={{ marginTop: 20 }}>

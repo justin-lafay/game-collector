@@ -3,17 +3,17 @@ import { useSQLiteContext } from "expo-sqlite";
 import { useCallback, useState } from "react";
 import { Button, ScrollView, Text, View } from "react-native";
 import Card from "../card";
+import { GameCard } from "./finder";
 
 export default function Index() {
 
-  const [games, setGames] = useState<{ id: number; name: string; minPlayers: string; maxPlayers: string; avgTime: number; maxTime: number; timeFeeling: string; type: string }[]>([]);
+  const [games, setGames] = useState<GameCard[]>([]);
   
   const database = useSQLiteContext();
-  console.log("Database context:", database.getAllAsync("SELECT name FROM sqlite_master WHERE type='table';"));
 
   async function fetchGames() {
     try {
-      const result: { id: number; name: string; minPlayers: string; maxPlayers: string; avgTime: number; maxTime: number; timeFeeling: string; type: string }[] = await database.getAllAsync("SELECT * FROM shelf;");
+      const result: GameCard[] = await database.getAllAsync("SELECT * FROM shelf;");
       setGames(result);
     } catch (error) {
       console.error("Error fetching games:", error);

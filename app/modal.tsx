@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button, KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, TouchableOpacity, View, } from "react-native";
 
 const timeFeelingOptions = ["Court", "Moyen", "Long"];
-const gameTypeOptions = ["Coopération", "Compétition", "Solo"];
+const gameTypeOptions = ["Coopératif", "Individuel", "Solo"];
 
 export default function Modal() {
 
@@ -14,7 +14,7 @@ export default function Modal() {
     const [avgTime, setAvgTime] = useState("60");
     const [maxTime, setMaxTime] = useState("120");
     const [feelTime, setFeelTime] = useState("Court");
-    const [type, setType] = useState("Coopération");
+    const [type, setType] = useState("Coopératif");
     const database = useSQLiteContext();
 
     const handleCreate = async () => {

@@ -7,8 +7,8 @@ export default function Browse() {
 
     const [players, setPlayers] = useState(2);
     const [time, setTime] = useState("Court");
-    const [style, setStyle] = useState("Coopération");
-    const styles = ["Coopération", "Individel"];
+    const [style, setStyle] = useState("Coopératif");
+    const styles = ["Coopératif", "Individuel", "Solo"];
     const temps = ["Court", "Moyen", "Long"];
 
     return (

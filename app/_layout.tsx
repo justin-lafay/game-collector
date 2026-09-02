@@ -2,7 +2,7 @@ import { Stack } from "expo-router";
 import { SQLiteProvider } from "expo-sqlite";
 
 
-export default function RootLayout() {
+export default function Layout() {
   return (
     <SQLiteProvider databaseName="init" assetSource={{ assetId: require('../assets/init.db') }}>
       <Stack>

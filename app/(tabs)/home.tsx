@@ -14,6 +14,7 @@ export default function Index() {
   async function fetchGames() {
     try {
       const result: GameCard[] = await database.getAllAsync("SELECT * FROM shelf;");
+      console.log("Games fetched successfully:", result);
       setGames(result);
     } catch (error) {
       console.error("Error fetching games:", error);
